@@ -4,7 +4,7 @@ import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 
 const Header = () => {
   return (
-    <Navbar bg="light" className="shadow p-3 mb-5 bg-white rounded header_container">
+    <Navbar bg="light" className="shadow p-3 mb-2 bg-white rounded header_container">
       <Container>
         <Navbar.Brand className="company_name">
           <img

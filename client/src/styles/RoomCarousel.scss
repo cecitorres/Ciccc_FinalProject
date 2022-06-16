@@ -1,0 +1,20 @@
+.roomcarousel_container {
+  & img {
+    height: 300px;
+  }
+}
+
+@media (min-width: 767px){
+  .roomcarousel_container {
+    & img {
+      height: 400px;
+    }
+  }
+}
+@media (min-width: 1025px){
+  .roomcarousel_container {
+    & img {
+      height: 500px;
+    }
+  }
+}
