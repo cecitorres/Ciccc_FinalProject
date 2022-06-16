@@ -1,6 +1,6 @@
 import React from "react";
 import '../styles/Header.scss'
-import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { Container, Nav, Navbar, SplitButton, Dropdown } from "react-bootstrap";
 
 const Header = () => {
   return (
@@ -19,13 +19,17 @@ const Header = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" className="d-flex justify-content-end">
           <Nav>
-            <NavDropdown title="Menu" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Guest Room</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">Contact</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">
-                Login / Sign In
-              </NavDropdown.Item>
-            </NavDropdown>
+          <SplitButton
+            key="1"
+            id={`dropdown-button-drop-start`}
+            drop="start"
+            variant="light"
+            title={`Menu`}
+          >
+            <Dropdown.Item eventKey="1">Guest Room</Dropdown.Item>
+            <Dropdown.Item eventKey="2">Contact</Dropdown.Item>
+            <Dropdown.Item eventKey="3">Logi / SognIn</Dropdown.Item>
+          </SplitButton>
           </Nav>
         </Navbar.Collapse>
       </Container>

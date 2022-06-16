@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { Carousel } from "react-bootstrap";
-import "../styles/RoomCarousel.scss";
+import '../../styles/home/RoomCarousel.scss';
 
 const RoomCarousel = () => {
   return (
