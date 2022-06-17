@@ -1,6 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 
 .header_container {
+  position: sticky;
+  top:0;
+  z-index: 100;
   & .company_name {
     font-family: 'Lobster', cursive;
   }

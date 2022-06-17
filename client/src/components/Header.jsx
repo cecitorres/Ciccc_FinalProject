@@ -28,7 +28,7 @@ const Header = () => {
           >
             <Dropdown.Item eventKey="1">Guest Room</Dropdown.Item>
             <Dropdown.Item eventKey="2">Contact</Dropdown.Item>
-            <Dropdown.Item eventKey="3">Logi / SognIn</Dropdown.Item>
+            <Dropdown.Item eventKey="3">Login / SignIn</Dropdown.Item>
           </SplitButton>
           </Nav>
         </Navbar.Collapse>

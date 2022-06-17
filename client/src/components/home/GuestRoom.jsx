@@ -6,7 +6,7 @@ const GuestRoom = () => {
   return (
     <Fragment>
       <h2 className="text-center mt-5">
-        Guest Room
+        - Guest Room -
       </h2>
       <Carousel>
         <Carousel.Item>

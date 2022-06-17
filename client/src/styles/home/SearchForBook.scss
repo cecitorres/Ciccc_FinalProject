@@ -1,10 +1,10 @@
 .search_container {
-  border: 3px solid rgb(255, 196, 0);
-  border-radius: 5px;
+  border: 2px solid rgba(223, 222, 218, 0.514);
+  border-radius: 8px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
-  margin: 1rem 0.4rem;
+  margin: 1rem 0.3rem;box-shadow: rgba(50, 50, 93, 0.157) 0px 10px 20px -4px, rgba(0, 0, 0, 0.185) 0px 8px 13px -8px;
   & .search_item {
     & i,
     & span {
@@ -32,14 +32,15 @@
 
 @media (min-width: 767px) {
   .search_container {
+    margin: 1rem 3rem;
     & .search_item {
       & i,
       & span {
         font-size: 16px;
-        color: #8d8c8c;
       }
-      & i{
+      & i {
         font-size: 20px;
+        padding-right: 10px;
       }
     }
     & .search_btn {
@@ -51,5 +52,17 @@
 }
 
 @media (min-width: 1025px) {
-  
+  .search_container {
+    margin: 1rem 5rem;
+    & .search_item {
+      & i,
+      & span {
+        font-size: 18px;
+      }
+      & i {
+        font-size: 22px;
+        padding-right: 12px;
+      }
+    }
+  }
 }
