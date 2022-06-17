@@ -1,23 +1,26 @@
-import React from 'react';
-import './App.scss';
-import Footer from './components/Footer';
-import Header from './components/Header';
-import GuestRoom from './components/home/GuestRoom';
-import RoomCarousel from './components/home/RoomCarousel';
-import SearchForBook from './components/home/SearchForBook';
-import Service from './components/home/Service';
+import React from "react";
+import "./App.scss";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
+import Home from "./components/home/Home";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Login from "./components/authForm/Login";
+import Signup from "./components/authForm/Signup";
 
 const App = () => {
   return (
-    <div className="App">
-      <Header />
-      <RoomCarousel />
-      <SearchForBook />
-      <GuestRoom />
-      <Service />
-      <Footer />
-    </div>
-  )
-}
+    <Router>
+      <div className="App">
+        <Header />
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/signup" element={<Signup />} />
+        </Routes>
+        <Footer />
+      </div>
+    </Router>
+  );
+};
 
-export default App
+export default App;
