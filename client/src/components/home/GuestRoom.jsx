@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import "../../styles/home/GuestRoom.scss";
-import { Button, Card, Carousel, Container } from "react-bootstrap";
+import {Card, Carousel, Container } from "react-bootstrap";
 
 const GuestRoom = () => {
   return (
@@ -23,7 +23,6 @@ const GuestRoom = () => {
                   Some quick example text to build on the card title and make up
                   the bulk of the card's content.
                 </Card.Text>
-                <Button variant="primary">Book Now</Button>
               </Card.Body>
             </Card>
             <Card className="card">
@@ -38,7 +37,6 @@ const GuestRoom = () => {
                   Some quick example text to build on the card title and make up
                   the bulk of the card's content.
                 </Card.Text>
-                <Button variant="primary">Book Now</Button>
               </Card.Body>
             </Card>
             <Card className="card">
@@ -53,7 +51,6 @@ const GuestRoom = () => {
                   Some quick example text to build on the card title and make up
                   the bulk of the card's content.
                 </Card.Text>
-                <Button variant="primary">Book Now</Button>
               </Card.Body>
             </Card>
           </Container>
@@ -73,7 +70,6 @@ const GuestRoom = () => {
                   Some quick example text to build on the card title and make up
                   the bulk of the card's content.
                 </Card.Text>
-                <Button variant="primary">Book Now</Button>
               </Card.Body>
             </Card>
             <Card className="card">
@@ -88,7 +84,6 @@ const GuestRoom = () => {
                   Some quick example text to build on the card title and make up
                   the bulk of the card's content.
                 </Card.Text>
-                <Button variant="primary">Book Now</Button>
               </Card.Body>
             </Card>
             <Card className="card">
@@ -103,7 +98,6 @@ const GuestRoom = () => {
                   Some quick example text to build on the card title and make up
                   the bulk of the card's content.
                 </Card.Text>
-                <Button variant="primary">Book Now</Button>
               </Card.Body>
             </Card>
           </Container>

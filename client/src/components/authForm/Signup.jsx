@@ -6,7 +6,7 @@ const Signup = () => {
   return (
     <div className="d-flex flex-column align-items-center">
     <Form className="d-flex flex-column justify-content-center form_container">
-      <h1 className="text-center">Log in</h1>
+      <h1 className="text-center mb-5">Sign Up</h1>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
         <Form.Control type="email" placeholder="Enter email" />
