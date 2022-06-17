@@ -1,14 +1,15 @@
 import React, { Fragment } from "react";
 import "../../styles/home/GuestRoom.scss";
 import { Card, Carousel, Container } from "react-bootstrap";
-import guestRoom01 from "../../data/GuestRoom01";
-import guestRoom02 from "../../data/GuestRoom02";
+import guestRoom01 from "../../data/guestRoom01";
+import guestRoom02 from "../../data/guestRoom02";
 
 const GuestRoom = () => {
   return (
     <Fragment>
       <h2 className="text-center mt-5">- Guest Room -</h2>
       <Carousel>
+        {/* First Slide */}
         <Carousel.Item>
           <Container className="d-flex first_carousel">
             {guestRoom01.map((room) => (
@@ -31,6 +32,8 @@ const GuestRoom = () => {
             ))}
           </Container>
         </Carousel.Item>
+
+        {/* 2nd Slide */}
         <Carousel.Item>
           <Container className="d-flex first_carousel">
             {guestRoom02.map((room) => (
