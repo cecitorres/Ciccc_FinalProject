@@ -5,9 +5,9 @@ import { Button, Card, Carousel, Container } from "react-bootstrap";
 const GuestRoom = () => {
   return (
     <Fragment>
-      <h3 className="text-center mt-5">
+      <h2 className="text-center mt-5">
         Guest Room
-      </h3>
+      </h2>
       <Carousel>
         <Carousel.Item>
           <Container className="d-flex first_carousel">

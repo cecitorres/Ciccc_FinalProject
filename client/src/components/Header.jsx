@@ -9,8 +9,8 @@ const Header = () => {
         <Navbar.Brand className="company_name">
           <img
             alt="company logo"
-            src="http://assets.stickpng.com/images/580b585b2edbce24c47b27f3.png"
-            width="40"
+            src="https://www.pinclipart.com/picdir/middle/491-4917260_canada-flag-images-clip-art.png"
+            width="30"
             height="30"
             className="d-inline-block align-top"
           />

@@ -4,9 +4,9 @@ import "../../styles/home/Service.scss";
 const Service = () => {
   return (
     <Fragment>
-      <h3 className="text-center mt-5">
+      <h2 className="text-center mt-5">
         Service
-      </h3>
+      </h2>
       <div className="service_container">
         <ul className="service_content list-unstyled">
           <li>
