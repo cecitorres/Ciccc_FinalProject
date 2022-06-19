@@ -1,6 +1,9 @@
 .form_container {
   width: 380px;
   height: 65vh;
+  & h1 {
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+  }
 }
 
 @media (min-width: 1025px){

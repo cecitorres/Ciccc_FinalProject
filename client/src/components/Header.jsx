@@ -1,8 +1,15 @@
 import React from "react";
 import '../styles/Header.scss'
+import { useNavigate } from 'react-router-dom';
 import { Container, Nav, Navbar, SplitButton, Dropdown } from "react-bootstrap";
 
 const Header = () => {
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    navigate("/login");
+  }
+  
   return (
     <Navbar bg="light" className="shadow p-3 mb-2 bg-white rounded header_container">
       <Container>
@@ -28,7 +35,7 @@ const Header = () => {
           >
             <Dropdown.Item eventKey="1">Guest Room</Dropdown.Item>
             <Dropdown.Item eventKey="2">Contact</Dropdown.Item>
-            <Dropdown.Item eventKey="3">Login / SignIn</Dropdown.Item>
+            <Dropdown.Item eventKey="3" onClick={handleLogin}>Login / SignIn</Dropdown.Item>
           </SplitButton>
           </Nav>
         </Navbar.Collapse>
