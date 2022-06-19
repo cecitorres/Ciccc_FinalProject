@@ -8,6 +8,7 @@ const UserSchema = mongoose.Schema({
   email: {
     type: String,
     require: true,
+    unique: true
   },
   password: {
     type: String,
@@ -16,7 +17,9 @@ const UserSchema = mongoose.Schema({
   isAdmin: {
     type: Boolean,
     default: false,
-  }
+  },
+}, {
+  timestamps: true
 });
 
 const User = mongoose.model("UserSchema", UserSchema);
