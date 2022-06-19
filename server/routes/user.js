@@ -11,11 +11,11 @@ const {
 
 router.get("/", getAllUsers);
 
-router.get("/:id", getUser);
+router.post("/", createUser);
 
 router.get("/login", getLoginUser);
 
-router.post("/", createUser);
+router.get("/:id", getUser);
 
 router.put("/:id", updateUser);
 
