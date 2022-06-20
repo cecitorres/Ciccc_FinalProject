@@ -6,6 +6,10 @@ import { Container, Nav, Navbar, SplitButton, Dropdown } from "react-bootstrap";
 const Header = () => {
   const navigate = useNavigate();
 
+  const handleHome = () => {
+    navigate("/");
+  }
+
   const handleLogin = () => {
     navigate("/login");
   }
@@ -13,7 +17,7 @@ const Header = () => {
   return (
     <Navbar bg="light" className="shadow p-3 mb-2 bg-white rounded header_container">
       <Container>
-        <Navbar.Brand className="company_name">
+        <Navbar.Brand className="company_name" onClick={handleHome}>
           <img
             alt="company logo"
             src="https://www.pinclipart.com/picdir/middle/491-4917260_canada-flag-images-clip-art.png"

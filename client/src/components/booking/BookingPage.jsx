@@ -54,7 +54,9 @@ const BookingPage = () => {
           <p>Number of People: <strong>2</strong></p>
           <p>Check-in: <strong>Monday, July 4, 2022 (3:00 PM)</strong></p>
           <p>Check-out: <strong>Tuesday, July 11, 2022 (noon)</strong></p>
-          <p>Total Price <strong style={{fontSize: "1.5rem"}}>504.43 CAD</strong></p>
+          <p>Pre-tax: <strong style={{fontSize: "1.2rem"}}>450.00 CAD</strong></p>
+          <p>Tax: <strong style={{fontSize: "1.2rem"}}>54.43 CAD</strong></p>
+          <p>Total Price: <strong style={{fontSize: "1.5rem"}}>504.43 CAD</strong></p>
           <Button onClick={handleBook}>BOOK</Button>
       </div>
     </div>
