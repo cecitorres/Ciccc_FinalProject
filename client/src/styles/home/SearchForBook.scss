@@ -4,6 +4,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+  position: relative;
   margin: 1rem 0.3rem;box-shadow: rgba(50, 50, 93, 0.157) 0px 10px 20px -4px, rgba(0, 0, 0, 0.185) 0px 8px 13px -8px;
   & .search_item {
     & i,
@@ -13,6 +14,12 @@
     }
     & i {
       padding-right: 5px;
+    }
+    & .search_date {
+      position: absolute;
+      top:60px;
+      left: 20px;
+      z-index: 200;
     }
   }
   & .search_container {
