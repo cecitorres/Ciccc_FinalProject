@@ -29,7 +29,7 @@ const Header = () => {
             variant="light"
             title={`Menu`}
           >
-            <Dropdown.Item eventKey="1">Guest Room</Dropdown.Item>
+            <Dropdown.Item eventKey="1" onClick={() => navigate("/")}>Home</Dropdown.Item>
             <Dropdown.Item eventKey="2" onClick={() => navigate("/contact")}>Contact</Dropdown.Item>
             <Dropdown.Item eventKey="3" onClick={() => navigate("/login")}>Login / SignIn</Dropdown.Item>
           </SplitButton>
