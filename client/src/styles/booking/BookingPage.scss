@@ -1,0 +1,25 @@
+.booking_container {
+  width: 100%;
+  & .step1 {
+    width: 90%;
+    border: 1px solid #ccc;
+    padding: 1rem;
+    border-radius: 5px;
+  }
+}
+
+@media (min-width: 767px) {
+  .booking_container {
+    & .step1 {
+      width: 80%;
+    }
+  }
+}
+
+@media (min-width: 1025px) {
+  .booking_container {
+    & .step1 {
+      width: 70%;
+    }
+  }
+}

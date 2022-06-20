@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./components/authForm/Login";
 import Signup from "./components/authForm/Signup";
 import AvailableRoom from "./components/availableRoom/AvailableRoom";
+import BookingPage from "./components/booking/BookingPage";
 
 const App = () => {
   return (
@@ -15,9 +16,10 @@ const App = () => {
         <Header />
         <Routes>
           <Route exact path="/" element={<Home />} />
-          <Route exact path="/available_room" element={<AvailableRoom />} />
-          <Route exact path="/login" element={<Login />} />
-          <Route exact path="/signup" element={<Signup />} />
+          <Route path="/available_room" element={<AvailableRoom />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/booking" element={<BookingPage />} />
         </Routes>
         <Footer />
       </div>

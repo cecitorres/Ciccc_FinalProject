@@ -2,9 +2,15 @@ import React, { Fragment, useState } from "react";
 import { Button, Card } from "react-bootstrap";
 import guestRoom01 from "../../data/guestRoom01";
 import RoomImgModal from "./RoomImgModal";
+import { useNavigate } from 'react-router-dom';
 
 const AvailableRoom = () => {
   const [modalShow, setModalShow] = useState(false);
+  const navigate = useNavigate();
+
+  const handleBook = () => {
+    navigate("/booking");
+  }
 
   return (
     <Fragment>
@@ -30,13 +36,14 @@ const AvailableRoom = () => {
                   <strong>{room.capacity}</strong>
                 </p>
                 <Card.Text>{room.description}</Card.Text>
-                <Button variant="primary">BOOK</Button>
+                <Button variant="primary" onClick={handleBook}>RESERVE</Button>
               </Card.Body>
             </Card>
           ))}
         </div>
       </div>
-          <RoomImgModal show={modalShow} onHide={() => setModalShow(false)} />
+
+      <RoomImgModal show={modalShow} onHide={() => setModalShow(false)} />
     </Fragment>
   );
 };
