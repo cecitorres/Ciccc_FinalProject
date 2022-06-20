@@ -1,14 +1,20 @@
 import React from "react";
 import { Button, FloatingLabel, Form } from "react-bootstrap";
 import "../../styles/booking/BookingPage.scss";
+import { useNavigate } from 'react-router-dom';
+// import axios from 'axios';
 
 const BookingPage = () => {
-  const handleBook = () => {
-    
+  const navigate = useNavigate();
+
+  const handleBookSubmit = (e) => {
+    e.preventDefault();
+    navigate("/payment")
   }
   return (
     <div className="booking_container d-flex flex-column justify-content-center align-items-center mb-3">
       <h2 className="mt-3 mb-5">Vancouver Hotel</h2>
+
       {/* Customer Detail */}
       <div className="step1 shadow-lg">
         <h4 className="border-bottom pb-2 mb-3">Step1: Your Detail</h4>
@@ -46,7 +52,6 @@ const BookingPage = () => {
       </div>
 
       {/* Room Detail */}
-
       <div className="step1 shadow-lg mt-3">
         <h4 className="border-bottom pb-2 mb-3">Step2: Room Detail</h4>
           <p>Room Type: <strong>King Room</strong></p>
@@ -57,7 +62,12 @@ const BookingPage = () => {
           <p>Pre-tax: <strong style={{fontSize: "1.2rem"}}>450.00 CAD</strong></p>
           <p>Tax: <strong style={{fontSize: "1.2rem"}}>54.43 CAD</strong></p>
           <p>Total Price: <strong style={{fontSize: "1.5rem"}}>504.43 CAD</strong></p>
-          <Button onClick={handleBook}>BOOK</Button>
+
+          {/* stripe */}
+          <form action="/create-checkout-session" method="POST" onSubmit={handleBookSubmit}>
+            <input type="hidden" name="lookup_key" value="{{PRICE_LOOKUP_KEY}}" />
+            <Button id="checkout-and-portal-button" type="submit">BOOK</Button>
+        </form>
       </div>
     </div>
   );

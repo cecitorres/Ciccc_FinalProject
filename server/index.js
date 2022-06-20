@@ -13,12 +13,12 @@ app.use(express.json());
 // Connect MongoDB
 const mongo_URL = process.env.MONGDB_URL;
 mongoose.connect(mongo_URL, (err) => {
-  if(err) {
-    console.log("Failed to connect to MongoDB..")
-  }else{
-    console.log("Succesfully, connected to MongoDB 🎉")
+  if (err) {
+    console.log("Failed to connect to MongoDB..");
+  } else {
+    console.log("Succesfully, connected to MongoDB 🎉");
   }
-})
+});
 
 app.get("/", (req, res) => {
   res.send("This is endpoint");
@@ -29,4 +29,4 @@ app.use("/api/v1/users", UserRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on PORT, ${PORT}`);
-})
+});

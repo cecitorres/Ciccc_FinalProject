@@ -5,19 +5,11 @@ import { Container, Nav, Navbar, SplitButton, Dropdown } from "react-bootstrap";
 
 const Header = () => {
   const navigate = useNavigate();
-
-  const handleHome = () => {
-    navigate("/");
-  }
-
-  const handleLogin = () => {
-    navigate("/login");
-  }
   
   return (
     <Navbar bg="light" className="shadow p-3 mb-2 bg-white rounded header_container">
       <Container>
-        <Navbar.Brand className="company_name" onClick={handleHome}>
+        <Navbar.Brand className="company_name" onClick={() => navigate("/")}>
           <img
             alt="company logo"
             src="https://www.pinclipart.com/picdir/middle/491-4917260_canada-flag-images-clip-art.png"
@@ -38,8 +30,8 @@ const Header = () => {
             title={`Menu`}
           >
             <Dropdown.Item eventKey="1">Guest Room</Dropdown.Item>
-            <Dropdown.Item eventKey="2">Contact</Dropdown.Item>
-            <Dropdown.Item eventKey="3" onClick={handleLogin}>Login / SignIn</Dropdown.Item>
+            <Dropdown.Item eventKey="2" onClick={() => navigate("/contact")}>Contact</Dropdown.Item>
+            <Dropdown.Item eventKey="3" onClick={() => navigate("/login")}>Login / SignIn</Dropdown.Item>
           </SplitButton>
           </Nav>
         </Navbar.Collapse>

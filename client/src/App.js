@@ -8,6 +8,8 @@ import Login from "./components/authForm/Login";
 import Signup from "./components/authForm/Signup";
 import AvailableRoom from "./components/availableRoom/AvailableRoom";
 import BookingPage from "./components/booking/BookingPage";
+import Payment from "./components/booking/Payment";
+import Contact from './components/contact/Contact';
 
 const App = () => {
   return (
@@ -20,6 +22,8 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/booking" element={<BookingPage />} />
+          <Route path="/payment" element={<Payment />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
         <Footer />
       </div>
