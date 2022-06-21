@@ -27,7 +27,6 @@ const SearchForBook = () => {
 
   const navigate = useNavigate();
   const handleSearchClick = () => {
-    //  if() statement  <-----Write a condition later
     navigate("/available_room");
   };
 

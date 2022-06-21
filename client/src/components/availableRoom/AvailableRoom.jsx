@@ -9,6 +9,9 @@ const AvailableRoom = () => {
   const navigate = useNavigate();
 
   const handleBook = () => {
+  // if(!user) { <-----Write a condition later
+  //   navigate("/login")
+  // }
     navigate("/booking");
   }
 
@@ -19,7 +22,7 @@ const AvailableRoom = () => {
         <div className="d-flex justify-content-evenly align-items-center flex-wrap mt-5">
           {guestRoom01.map((room) => (
             <Card
-              style={{ width: "18rem" }}
+              style={{ width: "340px" }}
               key={room.id}
               className="mt-3 mb-3 shadow"
             >

@@ -4,6 +4,7 @@ import { Button, Form } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showErr, setShowErr] = useState(false);
@@ -13,9 +14,9 @@ const Login = () => {
   const handleLoginSubmit = (e) => {
     e.preventDefault();
     setErrMsg("");
-    if(email !== "" && password !== "") {
+    if(name !== "" && email !== "" && password !== "") {
       navigate("/available_room");
-    }else if(email === "" || password === ""){
+    }else if(name === "" || email === "" || password === ""){
       setErrMsg("Please fill in the blank")
       setShowErr(true);
     }
@@ -25,6 +26,12 @@ const Login = () => {
     <div className="d-flex flex-column align-items-center">
       <Form className="d-flex flex-column justify-content-center form_container" onSubmit={handleLoginSubmit}>
         <h1 className="text-center mb-5">Log in</h1>
+        <Form.Group className="mb-3" controlId="formBasicName">
+          <Form.Label style={{fontSize: "1.2rem"}}>Name</Form.Label>
+          <Form.Control type="text" placeholder="Enter email" value={name} onChange={(e) => setName(e.target.value)} />
+          {showErr && !name ? <Form.Text className="text-danger">{errMsg}</Form.Text> : ""}
+        </Form.Group>
+
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label style={{fontSize: "1.2rem"}}>Email address</Form.Label>
           <Form.Control type="email" placeholder="Enter email" value={email} onChange={(e) => setEmail(e.target.value)} />
