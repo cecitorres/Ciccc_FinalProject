@@ -6,13 +6,9 @@ const UserRoutes = require("./routes/user");
 require("dotenv").config();
 const PORT = process.env.PORT || 2000;
 
-// middleware
-app.use(cors());
-app.use(express.json());
-
 // Connect MongoDB
-const mongo_URL = process.env.MONGDB_URL;
-mongoose.connect(mongo_URL, (err) => {
+const mongoURL = process.env.MONGDB_URL;
+mongoose.connect(mongoURL, (err) => {
   if (err) {
     console.log("Failed to connect to MongoDB..");
   } else {
@@ -20,12 +16,17 @@ mongoose.connect(mongo_URL, (err) => {
   }
 });
 
+// middleware
+app.use(cors());
+app.use(express.json());
+
+// middlewares
+app.use("/api/users", UserRoutes);
+
+
 app.get("/", (req, res) => {
   res.send("This is endpoint");
 });
-
-// userRoute
-app.use("/api/v1/users", UserRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on PORT, ${PORT}`);

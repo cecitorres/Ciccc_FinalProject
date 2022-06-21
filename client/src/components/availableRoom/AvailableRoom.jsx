@@ -3,16 +3,21 @@ import { Button, Card } from "react-bootstrap";
 import guestRoom01 from "../../data/guestRoom01";
 import RoomImgModal from "./RoomImgModal";
 import { useNavigate } from 'react-router-dom';
+import {UserAuth} from '../../context/AuthContext';
 
 const AvailableRoom = () => {
   const [modalShow, setModalShow] = useState(false);
   const navigate = useNavigate();
+  const {user} = UserAuth();
+  console.log(user);
 
-  const handleBook = () => {
-  // if(!user) { <-----Write a condition later
-  //   navigate("/login")
-  // }
-    navigate("/booking");
+  const handleBook = ({children}) => {
+    if(!user) {
+      return navigate("/suggest_login");
+    }else if(user) {
+      return navigate("/booking");
+    }
+    return children;
   }
 
   return (

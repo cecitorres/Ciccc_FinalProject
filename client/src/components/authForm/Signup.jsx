@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { Link, useNavigate } from "react-router-dom";
+import {UserAuth} from '../../context/AuthContext';
 
 const Signup = () => {
   const [name, setName] = useState("");
@@ -9,19 +10,20 @@ const Signup = () => {
   const [showErr, setShowErr] = useState(false);
   const [errMsg, setErrMsg] = useState("");
   const navigate = useNavigate();
+  const {signUp} = UserAuth();
 
-  const handleSignupSubmit = (e) => {
+
+  const handleSignupSubmit = async (e) => {
     e.preventDefault();
     setErrMsg("");
     if(name !== "" && email !== "" && password !== "") {
+      await signUp(email, password)
       navigate("/login");
     }else if(name === "" || email === "" || password === "") {
       setErrMsg("Please fill in the Blank");
       setShowErr(true);
     }
   }
-
-  console.log(email);
 
   return (
     <div className="d-flex flex-column align-items-center">
