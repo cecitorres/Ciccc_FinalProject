@@ -17,18 +17,27 @@ const SearchForBook = () => {
       key: "selection",
     },
   ]);
-// number of people
-const [openOptions, setOpenOptions] = useState(false);
-const [options, setOptions] = useState({
-  adult: 2,
-  children: 0,
-  room: 1
-})
+  // number of people
+  const [openOptions, setOpenOptions] = useState(false);
+  const [options, setOptions] = useState({
+    adult: 2,
+    children: 0,
+    room: 1,
+  });
 
   const navigate = useNavigate();
   const handleSearchClick = () => {
     //  if() statement  <-----Write a condition later
     navigate("/available_room");
+  };
+
+  const handleOption = (name, operation) => {
+    setOptions((prev) => {
+      return {
+        ...prev,
+        [name]: operation === "i" ? options[name] + 1 : options[name] - 1,
+      };
+    });
   };
 
   return (
@@ -44,11 +53,6 @@ const [options, setOptions] = useState({
             date[0].endDate,
             "MM/dd/yyyy"
           )}`}</span>
-        </div>
-        {/* Book for number of people */}
-        <div className="search_item">
-          <i className="fa-solid fa-users"></i>
-          <span>{`${options.adult} adult, ${options.children} children, ${options.room} room`}</span>
           {openDate && (
             <DateRange
               editableDateInputs={true}
@@ -59,8 +63,81 @@ const [options, setOptions] = useState({
             />
           )}
         </div>
+
+        {/* Book for number of people */}
+        <div className="search_item">
+          <i className="fa-solid fa-users"></i>
+          <span className="numberof_people" onClick={() => setOpenOptions(!openOptions)}>{`${options.adult} adult, ${options.children} children, ${options.room} room`}</span>
+          {openOptions && (
+            <div className="options">
+              {/* adult */}
+              <div className="optionItem">
+                <span className="optionText">Adult</span>
+                <div className="optionCounter">
+                  <button
+                    className="optionCounterButton"
+                    onClick={() => handleOption("adult", "d")}
+                    disabled={options.adult <= 1}
+                  >
+                    -
+                  </button>
+                  <span className="optionCounterNumber">{options.adult}</span>
+                  <button
+                    className="optionCounterButton"
+                    onClick={() => handleOption("adult", "i")}
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+              {/* children */}
+              <div className="optionItem">
+                <span className="optionText">Children</span>
+                <div className="optionCounter">
+                  <button
+                    className="optionCounterButton"
+                    onClick={() => handleOption("children", "d")}
+                    disabled={options.children <= 0}
+                  >
+                    -
+                  </button>
+                  <span className="optionCounterNumber">
+                    {options.children}
+                  </span>
+                  <button
+                    className="optionCounterButton"
+                    onClick={() => handleOption("children", "i")}
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+              {/* room*/}
+              <div className="optionItem">
+                <span className="optionText">Room</span>
+                <div className="optionCounter">
+                  <button
+                    className="optionCounterButton"
+                    onClick={() => handleOption("room", "d")}
+                    disabled={options.room <= 1}
+                  >
+                    -
+                  </button>
+                  <span className="optionCounterNumber">{options.room}</span>
+                  <button
+                    className="optionCounterButton"
+                    onClick={() => handleOption("room", "i")}
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+
         {/* Search button */}
-        <div className="search_container">
+        <div className="search_btn d-flex flex-column align-items-center justify-content-center">
           <Button className="search_btn" onClick={handleSearchClick}>
             Search
           </Button>
