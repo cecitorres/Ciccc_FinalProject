@@ -19,7 +19,7 @@ const Login = () => {
     try {
       if (email !== "" && password !== "") {
         await logIn(email, password);
-        navigate("/available_room");
+        navigate("/booking");
       } else if (email === "" || password === "") {
         setErrMsg("Please fill in the blank");
         setShowErr(true);
@@ -34,7 +34,7 @@ const Login = () => {
     e.preventDefault();
     try {
       await googleSignIn();
-      navigate("/available_room");
+      navigate("/booking");
     } catch (e) {
       setErrMsg(e);
     }

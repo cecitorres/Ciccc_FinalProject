@@ -2,10 +2,12 @@ import React from "react";
 import { Button, FloatingLabel, Form } from "react-bootstrap";
 import "../../styles/booking/BookingPage.scss";
 import { useNavigate } from 'react-router-dom';
-// import axios from 'axios';
+import { UserAuth } from "../../context/AuthContext";
+
 
 const BookingPage = () => {
   const navigate = useNavigate();
+  const {user} = UserAuth();
 
   const handleBookSubmit = (e) => {
     e.preventDefault();
@@ -31,13 +33,12 @@ const BookingPage = () => {
         </FloatingLabel>
 
         {/* Email */}
-        <p className="mb-0">*Your confirmation email goes here</p>
+        <p className="mb-0">Email / *Your confirmation email goes here</p>
         <FloatingLabel
           controlId="floatingInput"
-          label="Email address"
           className="mb-3"
         >
-          <Form.Control type="email" placeholder="name@example.com" />
+          <strong><p className="border p-3 rounded">{user.email}</p></strong>
         </FloatingLabel>
 
         {/* Phone */}
