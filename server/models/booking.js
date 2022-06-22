@@ -24,6 +24,22 @@ const BookingSchema = mongoose.Schema({
     roomType: {
         type: String,
     },
+    totalNights: {
+        type: Number
+    },
+    preTaxPrice: {
+        type: Number
+    },
+    tax: {
+        type: Number
+    },
+    totalPrice: {
+        type: Number
+    },
+    confirmed: {
+        type: Boolean,
+        default: false
+    }
 }, {
     timestamps: true
 })
