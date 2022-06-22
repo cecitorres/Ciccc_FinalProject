@@ -97,6 +97,7 @@ const SearchForBook = ({ name }) => {
               moveRangeOnFirstSelection={false}
               ranges={date}
               className="search_date"
+              minDate={new Date()}
             />
           )}
           {stay === 0 && minStay ? <Alert variant="danger">{minStay}</Alert> : ""}
