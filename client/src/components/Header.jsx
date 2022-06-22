@@ -2,10 +2,23 @@ import React from "react";
 import '../styles/Header.scss'
 import { useNavigate } from 'react-router-dom';
 import { Container, Nav, Navbar, SplitButton, Dropdown } from "react-bootstrap";
+import {UserAuth} from '../context/AuthContext';
 
-const Header = () => {
+const Header = ({setName}) => {
   const navigate = useNavigate();
+  const {logOut} = UserAuth();
   
+  const handleLogout = async (e) => {
+    e.preventDefault();
+    try{
+      await logOut();
+      navigate("/");
+      console.log("Logged out");
+    }catch(e) {
+      console.log(e);
+    }
+    setName("")
+  }
   return (
     <Navbar bg="light" className="shadow p-3 mb-2 bg-white rounded header_container">
       <Container>
@@ -32,6 +45,7 @@ const Header = () => {
             <Dropdown.Item eventKey="1" onClick={() => navigate("/")}>Home</Dropdown.Item>
             <Dropdown.Item eventKey="2" onClick={() => navigate("/contact")}>Contact</Dropdown.Item>
             <Dropdown.Item eventKey="3" onClick={() => navigate("/login")}>Login / SignIn</Dropdown.Item>
+            <Dropdown.Item eventKey="4" onClick={handleLogout}>Logout</Dropdown.Item>
           </SplitButton>
           </Nav>
         </Navbar.Collapse>

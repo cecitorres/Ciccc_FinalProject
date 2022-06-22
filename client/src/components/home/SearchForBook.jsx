@@ -9,11 +9,13 @@ import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import axios from "axios";
 
-const SearchForBook = () => {
+const SearchForBook = ({ name }) => {
   const { user } = UserAuth();
   const navigate = useNavigate();
+  // Room type
+  const [roomType, setRoomType] = useState("");
+  console.log(roomType);
 
-  // First step, useState for select room
   // date
   const [openDate, setOpenDate] = useState(false);
   const [date, setDate] = useState([
@@ -33,24 +35,29 @@ const SearchForBook = () => {
 
   const handleSearchClick = async ({ children }) => {
     if (!user) {
-      return navigate("/login");
+      return navigate("/suggest_login");
     } else if (user) {
-      const response = await axios.post('http://localhost:2000/api/v1/bookings', {
-        startDate: date[0].startDate,
-        endDate: date[0].endDate,
-        guests: {
-          adult: options.adult,
-          children: options.children
-        },
-        rooms: options.room,
-        roomType: "King Room",
-        user: '123'
-        // userID
-      });
+      const response = await axios.post(
+        "http://localhost:2000/api/v1/bookings",
+        {
+          startDate: date[0].startDate,
+          endDate: date[0].endDate,
+          guests: {
+            adult: options.adult,
+            children: options.children,
+          },
+          rooms: options.room,
+          roomType: roomType,
+          user: name,
+          // userID
+        }
+        );
+        console.log(response.data.data)
       return navigate("/booking");
     }
     return children;
   };
+  // console.log(name)
 
   const handleOption = (name, operation) => {
     setOptions((prev) => {
@@ -162,14 +169,17 @@ const SearchForBook = () => {
 
         {/* Room Options */}
         <div>
-          <Form.Select aria-label="Default select example">
+          <Form.Select
+            aria-label="Default select example"
+            onChange={(e) => setRoomType(e.target.value)}
+          >
             <option>Open this select menu</option>
-            <option value="1">Semi Double</option>
-            <option value="2">Queen Room</option>
-            <option value="3">Twin Room</option>
-            <option value="4">King Room</option>
-            <option value="5">Family Room</option>
-            <option value="6">Premium Room</option>
+            <option value="semi_double">Semi Double</option>
+            <option value="queen_room">Queen Room</option>
+            <option value="twin_room">Twin Room</option>
+            <option value="king_room">King Room</option>
+            <option value="family_room">Family Room</option>
+            <option value="premium_room">Premium Room</option>
           </Form.Select>
         </div>
         {/* Search button */}

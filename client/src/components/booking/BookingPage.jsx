@@ -13,6 +13,7 @@ const BookingPage = () => {
     e.preventDefault();
     navigate("/payment")
   }
+
   return (
     <div className="booking_container d-flex flex-column justify-content-center align-items-center mb-3">
       <h2 className="mt-3 mb-5">Vancouver Hotel</h2>
