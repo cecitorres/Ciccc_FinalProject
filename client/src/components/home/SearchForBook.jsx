@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../../styles/home/SearchForBook.scss";
-import { Button, Form } from "react-bootstrap";
+import { Alert, Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { DateRange } from "react-date-range";
 import { format } from "date-fns";
@@ -14,7 +14,6 @@ const SearchForBook = ({ name }) => {
   const navigate = useNavigate();
   // Room type
   const [roomType, setRoomType] = useState("");
-  console.log(roomType);
 
   // date
   const [openDate, setOpenDate] = useState(false);
@@ -33,9 +32,20 @@ const SearchForBook = ({ name }) => {
     room: 1,
   });
 
+  // Minimum Stay
+  const [minStay, setMinStay] = useState("");
+  const difference = (day1, day2) => {
+    return day2 - day1;
+  };
+  const stay = difference(date[0].startDate.getDate(), date[0].endDate.getDate());
+
+
   const handleSearchClick = async ({ children }) => {
     if (!user) {
       return navigate("/suggest_login");
+    } else if (stay <= 1) {
+      navigate("/")
+      setMinStay("Minimum stay is from 1 night");
     } else if (user) {
       const response = await axios.post(
         "http://localhost:2000/api/v1/bookings",
@@ -51,13 +61,12 @@ const SearchForBook = ({ name }) => {
           user: name,
           // userID
         }
-        );
-        console.log(response.data.data)
+      );
+      console.log(response.data.data);
       return navigate("/booking");
     }
     return children;
   };
-  // console.log(name)
 
   const handleOption = (name, operation) => {
     setOptions((prev) => {
@@ -90,6 +99,7 @@ const SearchForBook = ({ name }) => {
               className="search_date"
             />
           )}
+          {stay === 0 && minStay ? <Alert variant="danger">{minStay}</Alert> : ""}
         </div>
 
         {/* Book for number of people */}

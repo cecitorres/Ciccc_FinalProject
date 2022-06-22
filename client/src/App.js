@@ -12,9 +12,8 @@ import Contact from "./components/contact/Contact";
 import SuggestMsgLogin from "./components/authForm/SuggestMsgLogin";
 
 const App = () => {
-  const [name, setName] = useState(
-    () => JSON.parse(localStorage.getItem("name")) || ""
-  );
+  const [name, setName] = useState(() => JSON.parse(localStorage.getItem("name")) || "");
+  
   useEffect(() => {
     localStorage.setItem("name", JSON.stringify(name));
   }, [name]);
