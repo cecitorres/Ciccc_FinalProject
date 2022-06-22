@@ -3,8 +3,8 @@ const app = express();
 const cors = require("cors");
 const mongoose = require("mongoose");
 
-// const UserRoutes = require("./routes/user");
-// const BookingRoutes = require("./routes/booking");
+const UserRoutes = require("./routes/user");
+const BookingRoutes = require("./routes/booking");
 
 require("dotenv").config();
 const PORT = process.env.PORT || 2000;
@@ -28,8 +28,8 @@ app.get("/", (req, res) => {
 });
 
 // userRoute
-// app.use("/api/v1/users", UserRoutes);
-// app.use("/api/v1/bookings", BookingRoutes);
+app.use("/api/v1/users", UserRoutes);
+app.use("/api/v1/bookings", BookingRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on PORT, ${PORT}`);
