@@ -6,8 +6,10 @@ import { DateRange } from "react-date-range";
 import { format } from "date-fns";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
+import axios from "axios";
 
 const SearchForBook = () => {
+  // First step, useState for select room
   // date
   const [openDate, setOpenDate] = useState(false);
   const [date, setDate] = useState([
@@ -26,9 +28,21 @@ const SearchForBook = () => {
   });
 
   const navigate = useNavigate();
-  const handleSearchClick = () => {
+  const handleSearchClick = async () => {
     //  if() statement  <-----Write a condition later
-    navigate("/available_room");
+    const response = await axios.post('http://localhost:2000/api/v1/bookings', {
+      startDate: date[0].startDate,
+      endDate: date[0].endDate,
+      guests: {
+        adult: options.adult,
+        children: options.children
+      },
+      rooms: options.room,
+      roomType: "King Room",
+      user: '123'
+      // userID
+    });
+    navigate("/booking");
   };
 
   const handleOption = (name, operation) => {
@@ -139,7 +153,7 @@ const SearchForBook = () => {
         {/* Search button */}
         <div className="search_btn d-flex flex-column align-items-center justify-content-center">
           <Button className="search_btn" onClick={handleSearchClick}>
-            Search
+            Reserve
           </Button>
         </div>
       </div>

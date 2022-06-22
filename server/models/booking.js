@@ -2,21 +2,27 @@ const mongoose = require('mongoose');
 
 const BookingSchema = mongoose.Schema({
     guests: {
-        type: Number,
+        type: Object,
         required: true
     },
-    dates: {
+    startDate: {
         type: String,
         required: true
     },
+    endDate: {
+        type: String,
+        required: true
+    },
+    // TODO: Should be an user ID
     user: {
-        type: mongoose.SchemaTypes.ObjectId
+        type: String
+        // type: mongoose.SchemaTypes.ObjectId
     },
-    hotel: {
-      type: mongoose.SchemaTypes.ObjectId
+    rooms: {
+        type: Number
     },
-    room: {
-      type: mongoose.SchemaTypes.ObjectId
+    roomType: {
+        type: String,
     },
 }, {
     timestamps: true
