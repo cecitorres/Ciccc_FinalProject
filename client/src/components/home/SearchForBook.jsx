@@ -34,18 +34,24 @@ const SearchForBook = ({ name }) => {
 
   // Minimum Stay
   const [minStay, setMinStay] = useState("");
+  const [chooseRoom, setChooseRoom] = useState("");
   const difference = (day1, day2) => {
     return day2 - day1;
   };
-  const stay = difference(date[0].startDate.getDate(), date[0].endDate.getDate());
+  const stay = difference(
+    date[0].startDate.getDate(),
+    date[0].endDate.getDate()
+  );
 
-
-  const handleSearchClick = async ({ children }) => {
+  const handleSearchClick = async () => {
     if (!user) {
       return navigate("/suggest_login");
-    } else if (stay <= 1) {
-      navigate("/")
+    } else if (stay < 1) {
       setMinStay("Minimum stay is from 1 night");
+      navigate("/");
+    } else if (roomType === "") {
+      setChooseRoom("Please select room type");
+      navigate("/");
     } else if (user) {
       const response = await axios.post(
         "http://localhost:2000/api/v1/bookings",
@@ -65,7 +71,6 @@ const SearchForBook = ({ name }) => {
       console.log(response.data.data);
       return navigate("/booking");
     }
-    return children;
   };
 
   const handleOption = (name, operation) => {
@@ -100,7 +105,11 @@ const SearchForBook = ({ name }) => {
               minDate={new Date()}
             />
           )}
-          {stay === 0 && minStay ? <Alert variant="danger">{minStay}</Alert> : ""}
+          {stay === 0 && minStay ? (
+            <Alert variant="danger">{minStay}</Alert>
+          ) : (
+            ""
+          )}
         </div>
 
         {/* Book for number of people */}
@@ -192,6 +201,11 @@ const SearchForBook = ({ name }) => {
             <option value="family_room">Family Room</option>
             <option value="premium_room">Premium Room</option>
           </Form.Select>
+          {roomType === "" && chooseRoom ? (
+            <Alert variant="danger">{chooseRoom}</Alert>
+          ) : (
+            ""
+          )}
         </div>
         {/* Search button */}
         <div className="search_btn d-flex flex-column align-items-center justify-content-center">
