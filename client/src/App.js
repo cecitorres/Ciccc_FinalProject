@@ -10,6 +10,7 @@ import BookingPage from "./components/booking/BookingPage";
 import Payment from "./components/booking/Payment";
 import Contact from "./components/contact/Contact";
 import SuggestMsgLogin from "./components/authForm/SuggestMsgLogin";
+import BookingList from "./components/admin/BookingList";
 
 const App = () => {
   const [name, setName] = useState(() => JSON.parse(localStorage.getItem("name")) || "");
@@ -34,6 +35,7 @@ const App = () => {
         <Route path="/booking" element={<BookingPage />} />
         <Route path="/payment" element={<Payment />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/admin/bookings" element={<BookingList />} />
       </Routes>
       <Footer />
     </div>

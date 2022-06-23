@@ -1,3 +1,5 @@
+const { calculateTotalNights } = require("../utils/index");
+const { ROOM_PRICES_PEER_NIGHT, TAX_VALUE } = require("../constants/index")
 const Booking = require('../models/booking');
 
 const getBookings = async (req, res) => {
@@ -19,7 +21,19 @@ const getBookings = async (req, res) => {
 const createBooking = async (req, res) => {
     try {
         const body = req.body;
-        const booking = new Booking(body);
+
+        const totalNights = calculateTotalNights(new Date(body.endDate), new Date(body.startDate));
+        const preTaxPrice = body.rooms * totalNights * ROOM_PRICES_PEER_NIGHT[body.roomType];
+        const tax = preTaxPrice * TAX_VALUE;
+        const totalPrice = preTaxPrice + tax;
+
+        const booking = new Booking({
+            ...body,
+            totalNights,
+            preTaxPrice,
+            tax,
+            totalPrice
+        });
 
         const data = await booking.save();
 
