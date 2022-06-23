@@ -15,6 +15,10 @@ const BookingSchema = mongoose.Schema({
         default: 'pending',
         enum: ['pending', 'cancel', 'approved', 'active', 'completed']
     },
+    roomType: {
+        type: String,
+        required: true
+    },
     contact: {
         // TODO: Should be an user ID
         userID: {
