@@ -9,9 +9,24 @@ import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import axios from "axios";
 
-const SearchForBook = ({ name }) => {
+
+let d = new Date();
+console.log(d.toString());
+let year = d.getFullYear();
+let month = d.getMonth();
+let day = d.getDate();
+let dayofweek = d.getDay();
+
+const monthname = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+const dayname = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+const stayDate = dayname[dayofweek] + " " + monthname[month] + " " + day + ", " + year;
+console.log(stayDate);
+
+
+const SearchForBook = ({ name, setBookingInfo }) => {
   const { user } = UserAuth();
   const navigate = useNavigate();
+
   // Room type
   const [roomType, setRoomType] = useState("");
 
@@ -68,7 +83,7 @@ const SearchForBook = ({ name }) => {
           // userID
         }
       );
-      console.log(response.data.data);
+      setBookingInfo(response.data.data);
       return navigate("/booking");
     }
   };

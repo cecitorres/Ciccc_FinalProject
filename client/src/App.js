@@ -7,38 +7,50 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./components/authForm/Login";
 import Signup from "./components/authForm/Signup";
 import BookingPage from "./components/booking/BookingPage";
-import Payment from "./components/booking/Payment";
+// import Confirm from "./components/booking/Confirm";
 import Contact from "./components/contact/Contact";
 import SuggestMsgLogin from "./components/authForm/SuggestMsgLogin";
 import BookingList from "./components/admin/BookingList";
 
 const App = () => {
-  const [name, setName] = useState(() => JSON.parse(localStorage.getItem("name")) || "");
-  
+  const [name, setName] = useState(
+    () => JSON.parse(localStorage.getItem("name")) || ""
+  );
+  // Booking data
+  const [bookingInfo, setBookingInfo] = useState([]);
+
   useEffect(() => {
     localStorage.setItem("name", JSON.stringify(name));
   }, [name]);
-  console.log(name);
 
+
+  // Monday, July 4, 2022
   return (
     <Router>
-    <div className="App">
-      <Header setName={setName} />
-      <Routes>
-        <Route exact path="/" element={<Home name={name} />} />
-        <Route path="/suggest_login" element={<SuggestMsgLogin />} />
-        <Route path="/login" element={<Login />} />
-        <Route
-          path="/signup"
-          element={<Signup name={name} setName={setName} />}
-        />
-        <Route path="/booking" element={<BookingPage />} />
-        <Route path="/payment" element={<Payment />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/admin/bookings" element={<BookingList />} />
-      </Routes>
-      <Footer />
-    </div>
+      <div className="App">
+        <Header setName={setName} />
+        <Routes>
+          <Route
+            exact
+            path="/"
+            element={<Home name={name} setBookingInfo={setBookingInfo} />}
+          />
+          <Route path="/suggest_login" element={<SuggestMsgLogin />} />
+          <Route path="/login" element={<Login />} />
+          <Route
+            path="/signup"
+            element={<Signup name={name} setName={setName} />}
+          />
+          <Route
+            path="/booking"
+            element={<BookingPage bookingInfo={bookingInfo} />}
+          />
+          {/* <Route path="/confirm" element={<Confirm />} /> */}
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/admin/bookings" element={<BookingList />} />
+        </Routes>
+        <Footer />
+      </div>
     </Router>
   );
 };
