@@ -41,7 +41,7 @@ const SearchForBook = ({ name, setBookingInfo }) => {
   // number of people
   const [openOptions, setOpenOptions] = useState(false);
   const [options, setOptions] = useState({
-    adult: 2,
+    adults: 2,
     children: 0,
     room: 1,
   });
@@ -73,7 +73,7 @@ const SearchForBook = ({ name, setBookingInfo }) => {
           startDate: date[0].startDate,
           endDate: date[0].endDate,
           guests: {
-            adult: options.adult,
+            adults: options.adults,
             children: options.children,
           },
           rooms: options.room,
@@ -132,24 +132,24 @@ const SearchForBook = ({ name, setBookingInfo }) => {
           <span
             className="numberof_people"
             onClick={() => setOpenOptions(!openOptions)}
-          >{`${options.adult} adult, ${options.children} children, ${options.room} room`}</span>
+          >{`${options.adults} adults, ${options.children} children, ${options.room} room`}</span>
           {openOptions && (
             <div className="options">
-              {/* adult */}
+              {/* adults */}
               <div className="optionItem">
                 <span className="optionText">Adult</span>
                 <div className="optionCounter">
                   <button
                     className="optionCounterButton"
-                    onClick={() => handleOption("adult", "d")}
-                    disabled={options.adult <= 1}
+                    onClick={() => handleOption("adults", "d")}
+                    disabled={options.adults <= 1}
                   >
                     -
                   </button>
-                  <span className="optionCounterNumber">{options.adult}</span>
+                  <span className="optionCounterNumber">{options.adults}</span>
                   <button
                     className="optionCounterButton"
-                    onClick={() => handleOption("adult", "i")}
+                    onClick={() => handleOption("adults", "i")}
                   >
                     +
                   </button>

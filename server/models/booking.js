@@ -1,10 +1,6 @@
 const mongoose = require('mongoose');
 
 const BookingSchema = mongoose.Schema({
-    guests: {
-        type: Object,
-        required: true
-    },
     startDate: {
         type: String,
         required: true
@@ -13,17 +9,47 @@ const BookingSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    // TODO: Should be an user ID
-    user: {
-        type: String
-        // type: mongoose.SchemaTypes.ObjectId
-    },
-    rooms: {
-        type: Number
+    status: {
+        type: String,
+        required: true,
+        default: 'pending',
+        enum: ['pending', 'cancel', 'approved', 'active', 'completed']
     },
     roomType: {
         type: String,
+        required: true
     },
+    contact: {
+        // TODO: Should be an user ID
+        userID: {
+            type: String
+            // type: mongoose.SchemaTypes.ObjectId
+        },
+        fullName: {
+            type: String,
+        },
+        email: {
+            type: String
+        },
+        phoneNumber: {
+            type: String
+        }
+    },
+    roomID: {
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: 'Room'
+    },
+    guests: {
+        adults: {
+            type: Number,
+            required: true
+        },
+        children: {
+            type: Number,
+            default: 0
+        }
+    },
+    // Maybe optionals in schema?
     totalNights: {
         type: Number
     },
@@ -35,10 +61,6 @@ const BookingSchema = mongoose.Schema({
     },
     totalPrice: {
         type: Number
-    },
-    confirmed: {
-        type: Boolean,
-        default: false
     }
 }, {
     timestamps: true
