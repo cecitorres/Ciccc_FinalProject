@@ -11,23 +11,29 @@ const BookingSchema = mongoose.Schema({
     },
     status: {
         type: String,
-        require: true,
+        required: true,
         default: 'pending',
         enum: ['pending', 'cancel', 'approved', 'active', 'completed']
     },
-    // TODO: Should be an user ID
-    user: {
-        type: String
+    contact: {
+        // TODO: Should be an user ID
+        userID: String,
         // type: mongoose.SchemaTypes.ObjectId
+        email: {
+            type: String
+        },
+        phoneNumber: {
+            type: String
+        }
     },
     roomID: {
         type: mongoose.SchemaTypes.ObjectId,
         ref: 'Room'
     },
-    // guests: {
-    //     type: Object,
-    //     required: true
-    // },
+    guests: {
+        type: Object,
+        required: true
+    },
     // Maybe optionals in schema?
     totalNights: {
         type: Number
