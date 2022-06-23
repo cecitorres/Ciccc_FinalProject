@@ -19,7 +19,7 @@ const Login = () => {
     try {
       if (email !== "" && password !== "") {
         await logIn(email, password);
-        navigate("/booking");
+        navigate("/");
       } else if (email === "" || password === "") {
         setErrMsg("Please fill in the blank");
         setShowErr(true);

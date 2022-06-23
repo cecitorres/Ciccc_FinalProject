@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../../styles/home/SearchForBook.scss";
-import { Button, Form } from "react-bootstrap";
+import { Alert, Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { DateRange } from "react-date-range";
 import { format } from "date-fns";
@@ -9,11 +9,12 @@ import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import axios from "axios";
 
-const SearchForBook = () => {
+const SearchForBook = ({ name }) => {
   const { user } = UserAuth();
   const navigate = useNavigate();
+  // Room type
+  const [roomType, setRoomType] = useState("");
 
-  // First step, useState for select room
   // date
   const [openDate, setOpenDate] = useState(false);
   const [date, setDate] = useState([
@@ -31,25 +32,45 @@ const SearchForBook = () => {
     room: 1,
   });
 
-  const handleSearchClick = async ({ children }) => {
+  // Minimum Stay
+  const [minStay, setMinStay] = useState("");
+  const [chooseRoom, setChooseRoom] = useState("");
+  const difference = (day1, day2) => {
+    return day2 - day1;
+  };
+  const stay = difference(
+    date[0].startDate.getDate(),
+    date[0].endDate.getDate()
+  );
+
+  const handleSearchClick = async () => {
     if (!user) {
-      return navigate("/login");
+      return navigate("/suggest_login");
+    } else if (stay < 1) {
+      setMinStay("Minimum stay is from 1 night");
+      navigate("/");
+    } else if (roomType === "") {
+      setChooseRoom("Please select room type");
+      navigate("/");
     } else if (user) {
-      const response = await axios.post('http://localhost:2000/api/v1/bookings', {
-        startDate: date[0].startDate,
-        endDate: date[0].endDate,
-        guests: {
-          adult: options.adult,
-          children: options.children
-        },
-        rooms: options.room,
-        roomType: "King Room",
-        user: '123'
-        // userID
-      });
+      const response = await axios.post(
+        "http://localhost:2000/api/v1/bookings",
+        {
+          startDate: date[0].startDate,
+          endDate: date[0].endDate,
+          guests: {
+            adult: options.adult,
+            children: options.children,
+          },
+          rooms: options.room,
+          roomType: roomType,
+          user: name,
+          // userID
+        }
+      );
+      console.log(response.data.data);
       return navigate("/booking");
     }
-    return children;
   };
 
   const handleOption = (name, operation) => {
@@ -81,7 +102,13 @@ const SearchForBook = () => {
               moveRangeOnFirstSelection={false}
               ranges={date}
               className="search_date"
+              minDate={new Date()}
             />
+          )}
+          {stay === 0 && minStay ? (
+            <Alert variant="danger">{minStay}</Alert>
+          ) : (
+            ""
           )}
         </div>
 
@@ -162,15 +189,23 @@ const SearchForBook = () => {
 
         {/* Room Options */}
         <div>
-          <Form.Select aria-label="Default select example">
+          <Form.Select
+            aria-label="Default select example"
+            onChange={(e) => setRoomType(e.target.value)}
+          >
             <option>Open this select menu</option>
-            <option value="1">Semi Double</option>
-            <option value="2">Queen Room</option>
-            <option value="3">Twin Room</option>
-            <option value="4">King Room</option>
-            <option value="5">Family Room</option>
-            <option value="6">Premium Room</option>
+            <option value="semi_double">Semi Double</option>
+            <option value="queen_room">Queen Room</option>
+            <option value="twin_room">Twin Room</option>
+            <option value="king_room">King Room</option>
+            <option value="family_room">Family Room</option>
+            <option value="premium_room">Premium Room</option>
           </Form.Select>
+          {roomType === "" && chooseRoom ? (
+            <Alert variant="danger">{chooseRoom}</Alert>
+          ) : (
+            ""
+          )}
         </div>
         {/* Search button */}
         <div className="search_btn d-flex flex-column align-items-center justify-content-center">

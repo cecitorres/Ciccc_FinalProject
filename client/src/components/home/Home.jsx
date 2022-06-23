@@ -4,11 +4,11 @@ import RoomCarousel from './RoomCarousel';
 import SearchForBook from './SearchForBook';
 import Service from './Service';
 
-const Home = () => {
+const Home = ({name}) => {
   return (
     <div>
       <RoomCarousel />
-      <SearchForBook />
+      <SearchForBook name={name} />
       <GuestRoom />
       <Service />
     </div>

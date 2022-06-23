@@ -3,15 +3,14 @@ import { Button, Form } from 'react-bootstrap';
 import { Link, useNavigate } from "react-router-dom";
 import {UserAuth} from '../../context/AuthContext';
 
-const Signup = () => {
-  const [name, setName] = useState("");
+const Signup = ({name, setName}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showErr, setShowErr] = useState(false);
   const [errMsg, setErrMsg] = useState("");
   const navigate = useNavigate();
   const {signUp} = UserAuth();
-
+  
 
   const handleSignupSubmit = async (e) => {
     e.preventDefault();
@@ -33,7 +32,9 @@ const Signup = () => {
       <Form.Group className="mb-3" controlId="formBasicName">
           <Form.Label style={{fontSize: "1.2rem"}}>Name</Form.Label>
           <Form.Control type="text" placeholder="Enter email" value={name} onChange={(e) => setName(e.target.value)} />
+          
           {showErr && !name ? <Form.Text className="text-danger">{errMsg}</Form.Text> : ""}
+          
       </Form.Group>
 
       {/* email */}
