@@ -37,8 +37,7 @@ const createBooking = async (req, res) => {
 
         if (!isBookingAvailable) {
             return res.status(412).json({
-                message: "Room not available",
-                error
+                message: "Room not available"
             })
         }
 

@@ -17,8 +17,13 @@ const BookingSchema = mongoose.Schema({
     },
     contact: {
         // TODO: Should be an user ID
-        userID: String,
-        // type: mongoose.SchemaTypes.ObjectId
+        userID: {
+            type: String
+            // type: mongoose.SchemaTypes.ObjectId
+        },
+        fullName: {
+            type: String,
+        },
         email: {
             type: String
         },
@@ -31,8 +36,14 @@ const BookingSchema = mongoose.Schema({
         ref: 'Room'
     },
     guests: {
-        type: Object,
-        required: true
+        adults: {
+            type: Number,
+            required: true
+        },
+        children: {
+            type: Number,
+            default: 0
+        }
     },
     // Maybe optionals in schema?
     totalNights: {
