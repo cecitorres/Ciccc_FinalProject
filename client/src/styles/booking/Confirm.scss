@@ -1,0 +1,25 @@
+.confirm_container {
+  height: 60vh;
+  & h2 {
+    font-size: 2rem;
+  }
+  & img {
+    display: block;
+    width: 250px;
+  }
+  & p {
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+    font-size: 1.3rem;
+  }
+}
+
+@media (min-width: 767px) {
+  .confirm_container {
+    & h2 {
+      font-size: 3rem;
+    }
+    & img {
+      width: 350px;
+    }
+  }
+}
