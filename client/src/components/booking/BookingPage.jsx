@@ -3,18 +3,31 @@ import { Button, FloatingLabel, Form } from "react-bootstrap";
 import "../../styles/booking/BookingPage.scss";
 import { UserAuth } from "../../context/AuthContext";
 import Confirm from '../booking/Confirm';
+import axios from 'axios';
 
 const BookingPage = ({ bookingInfo }) => {
   const [customerName, setCustomerName] = useState("");
   const [customerPhone, setCustomerPhone] = useState("");
   const [show, setShow] = useState(false);
   const [errMsg, setErrMsg] = useState("");
+  const [allInfo, setAllInfo] = ([]);
   const { user } = UserAuth();
 
-  const handleBookSubmit = (e) => {
+  const handleBookSubmit = async (e) => {
     e.preventDefault();
     if (customerName !== "" && customerPhone !== "") {
       setShow(true);
+      // const response = await axios.put(
+      //   "http://localhost:2000/api/v1/bookings",
+      //   {
+      //     fullName: customerName,
+      //     email: user.email,
+      //     phone: customerPhone,
+      //     userId: bookingInfo._id
+      //   }
+      // )
+      // setAllInfo(response.data.data);
+      // console.log(allInfo);
     }else if(customerName === "" || customerPhone === "") {
       setErrMsg("*Fill in the blank");
     }
@@ -81,7 +94,7 @@ const BookingPage = ({ bookingInfo }) => {
 <div className="step1 shadow-lg mt-3">
   <h4 className="border-bottom pb-2 mb-3">Step2: Room Detail</h4>
   <p>
-    Room Type: <strong>{bookingInfo.roomType}</strong>
+    Room Type: <strong>{bookingInfo.roomType.replace("_", " ").toUpperCase()}</strong>
   </p>
   <img
     src="https://www.gannett-cdn.com/-mm-/05b227ad5b8ad4e9dcb53af4f31d7fbdb7fa901b/c=0-64-2119-1259/local/-/media/USATODAY/USATODAY/2014/08/13/1407953244000-177513283.jpg"
