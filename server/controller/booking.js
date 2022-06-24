@@ -6,6 +6,7 @@ const {
     TAX_VALUE
 } = require("../constants/index")
 const Booking = require('../models/booking');
+const Rooms = require('../models/room');
 
 const getBookings = async (req, res) => {
     try {
@@ -43,6 +44,8 @@ const createBooking = async (req, res) => {
 
         const booking = new Booking({
             ...body,
+            startDate: new Date(body.startDate),
+            endDate: new Date(body.endDate),
             totalNights,
             preTaxPrice,
             tax,
@@ -65,11 +68,70 @@ const createBooking = async (req, res) => {
 }
 
 const confirmBooking = async (req, res) => {
-    const id = req.params.id;
-    const body = req.body;
-
     try {
+        const id = req.params.id;
+        const body = req.body;
+
         // Validate if there's room available for that dates
+        // const booking = await Booking.findById(id);
+        // const startDate = booking.startDate;
+        // const endDate = booking.endDate;
+        // const roomsAvailable = await Rooms.find({
+        //     $and: [{
+        //             type: booking.roomType
+        //         },
+        //         {
+        //             booking: {
+        //                 $elemMatch: {
+        //                     $or: [{
+        //                             startDate: {
+        //                                 $gte: endDate
+        //                             }
+        //                         },
+        //                         {
+        //                             endDate: {
+        //                                 $lte: startDate
+        //                             }
+        //                         }
+        //                     ]
+        //                 }
+        //             }
+        //         }, {
+        //             bookings: {
+        //                 $not: {
+        //                     $elemMatch: {
+        //                         $or: [{
+        //                                 startDate: {
+        //                                     $gte: startDate,
+        //                                     $lte: endDate
+        //                                 }
+        //                             },
+        //                             {
+        //                                 endDate: {
+        //                                     $lte: endDate,
+        //                                     $gte: startDate
+        //                                 }
+        //                             }
+        //                         ]
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //     ]
+        // })
+        // console.log(roomsAvailable, startDate, endDate, 123)
+        // const roomID = roomsAvailable[0]._id;
+        // const data2 = await Rooms.findOneAndUpdate({
+        //     _id: roomID
+        // }, {
+        //     bookings: [booking]
+        // }, {
+        //     new: true,
+        //     runValidators: true
+        // });
+
+        // console.log(data2,123)
+
         const isBookingAvailable = true;
 
         if (!isBookingAvailable) {
@@ -93,6 +155,7 @@ const confirmBooking = async (req, res) => {
             data
         })
     } catch (error) {
+        console.log(error)
         return res.status(500).json({
             message: "There was an error!",
             error
