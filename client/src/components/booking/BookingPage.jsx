@@ -9,26 +9,26 @@ const BookingPage = ({ bookingInfo }) => {
   const [customerName, setCustomerName] = useState("");
   const [customerPhone, setCustomerPhone] = useState("");
   const [show, setShow] = useState(false);
-  const [errMsg, setErrMsg] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
   const { user } = UserAuth();
 
   const handleBookSubmit = async () => {
     try {
       if (customerName !== "" && customerPhone !== "") {
-        setShow(true);
         await axios.put(
           `http://localhost:2000/api/v1/bookings/${bookingInfo._id}`,
           {
-            contact: {   
+            contact: {
               fullName: customerName,
               email: user.email,
               phoneNumber: customerPhone,
               userID: user.uid,
-            }
+            },
           }
         );
+        setShow(true);
       } else if (customerName === "" || customerPhone === "") {
-        setErrMsg("*Fill in the blank");
+        setErrorMsg("*Fill in the blank");
       }
     } catch (e) {
       console.log(e);
@@ -47,8 +47,8 @@ const BookingPage = ({ bookingInfo }) => {
         <>
           <h2 className="mt-3 mb-5">Information</h2>
           {/*---------------------- 
-   Customer Detail 
------------------------*/}
+            Customer Detail 
+          -----------------------*/}
           <div className="step1 shadow-lg">
             <h4 className="border-bottom pb-2 mb-3">Step1: Your Detail</h4>
             {/* Name */}
@@ -66,8 +66,8 @@ const BookingPage = ({ bookingInfo }) => {
                 onChange={(e) => setCustomerName(e.target.value)}
                 value={customerName}
               />
-              {errMsg && !customerName ? (
-                <p style={{ color: "red" }}>{errMsg}</p>
+              {errorMsg && !customerName ? (
+                <p style={{ color: "red" }}>{errorMsg}</p>
               ) : (
                 ""
               )}
@@ -93,8 +93,8 @@ const BookingPage = ({ bookingInfo }) => {
                 onChange={(e) => setCustomerPhone(e.target.value)}
                 value={customerPhone}
               />
-              {errMsg && !customerPhone ? (
-                <p style={{ color: "red" }}>{errMsg}</p>
+              {errorMsg && !customerPhone ? (
+                <p style={{ color: "red" }}>{errorMsg}</p>
               ) : (
                 ""
               )}
@@ -102,8 +102,8 @@ const BookingPage = ({ bookingInfo }) => {
           </div>
 
           {/*---------------------- 
-   Room Detail 
------------------------*/}
+            Room Detail 
+          -----------------------*/}
           <div className="step1 shadow-lg mt-3">
             <h4 className="border-bottom pb-2 mb-3">Step2: Room Detail</h4>
             <p>
@@ -149,21 +149,13 @@ const BookingPage = ({ bookingInfo }) => {
               </strong>
             </p>
 
-            {/* stripe */}
-            <form
-              action="/create-checkout-session"
-              method="POST"
-              onSubmit={handleBookSubmit}
+            <Button
+              id="checkout-and-portal-button"
+              type="submit"
+              onClick={handleBookSubmit}
             >
-              <input
-                type="hidden"
-                name="lookup_key"
-                value="{{PRICE_LOOKUP_KEY}}"
-              />
-              <Button id="checkout-and-portal-button" type="submit">
-                BOOK
-              </Button>
-            </form>
+              BOOK
+            </Button>
           </div>
         </>
       ) : (
