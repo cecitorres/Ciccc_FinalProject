@@ -94,7 +94,7 @@ const BookingPage = ({ bookingInfo }) => {
 <div className="step1 shadow-lg mt-3">
   <h4 className="border-bottom pb-2 mb-3">Step2: Room Detail</h4>
   <p>
-    Room Type: <strong>{bookingInfo.roomType.replace("_", " ").toUpperCase()}</strong>
+    Room Type: <strong>{bookingInfo.roomType}</strong>
   </p>
   <img
     src="https://www.gannett-cdn.com/-mm-/05b227ad5b8ad4e9dcb53af4f31d7fbdb7fa901b/c=0-64-2119-1259/local/-/media/USATODAY/USATODAY/2014/08/13/1407953244000-177513283.jpg"

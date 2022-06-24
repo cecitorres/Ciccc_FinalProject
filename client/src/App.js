@@ -7,10 +7,10 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./components/authForm/Login";
 import Signup from "./components/authForm/Signup";
 import BookingPage from "./components/booking/BookingPage";
-// import Confirm from "./components/booking/Confirm";
 import Contact from "./components/contact/Contact";
 import SuggestMsgLogin from "./components/authForm/SuggestMsgLogin";
 import BookingList from "./components/admin/BookingList";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const App = () => {
   const [name, setName] = useState(
@@ -22,7 +22,6 @@ const App = () => {
   useEffect(() => {
     localStorage.setItem("name", JSON.stringify(name));
   }, [name]);
-
 
   // Monday, July 4, 2022
   return (
@@ -45,7 +44,15 @@ const App = () => {
             path="/booking"
             element={<BookingPage bookingInfo={bookingInfo} />}
           />
-          {/* <Route path="/confirm" element={<Confirm />} /> */}
+
+          <Route
+            path="/bookinglist"
+            element={
+              <ProtectedRoute>
+                <BookingList />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/contact" element={<Contact />} />
           <Route path="/admin/bookings" element={<BookingList />} />
         </Routes>
