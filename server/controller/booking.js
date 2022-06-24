@@ -73,73 +73,76 @@ const confirmBooking = async (req, res) => {
         const body = req.body;
 
         // Validate if there's room available for that dates
-        // const booking = await Booking.findById(id);
-        // const startDate = booking.startDate;
-        // const endDate = booking.endDate;
-        // const roomsAvailable = await Rooms.find({
-        //     $and: [{
-        //             type: booking.roomType
-        //         },
-        //         {
-        //             booking: {
-        //                 $elemMatch: {
-        //                     $or: [{
-        //                             startDate: {
-        //                                 $gte: endDate
-        //                             }
-        //                         },
-        //                         {
-        //                             endDate: {
-        //                                 $lte: startDate
-        //                             }
-        //                         }
-        //                     ]
-        //                 }
-        //             }
-        //         }, {
-        //             bookings: {
-        //                 $not: {
-        //                     $elemMatch: {
-        //                         $or: [{
-        //                                 startDate: {
-        //                                     $gte: startDate,
-        //                                     $lte: endDate
-        //                                 }
-        //                             },
-        //                             {
-        //                                 endDate: {
-        //                                     $lte: endDate,
-        //                                     $gte: startDate
-        //                                 }
-        //                             }
-        //                         ]
-        //                     }
-        //                 }
-        //             }
-        //         }
-        //     ]
-        // })
-        // console.log(roomsAvailable, startDate, endDate, 123)
-        // const roomID = roomsAvailable[0]._id;
-        // const data2 = await Rooms.findOneAndUpdate({
-        //     _id: roomID
-        // }, {
-        //     bookings: [booking]
-        // }, {
-        //     new: true,
-        //     runValidators: true
-        // });
+        const booking = await Booking.findById(id);
+        const startDate = booking.startDate;
+        const endDate = booking.endDate;
+        const roomAvailable = await Rooms.findOne({
+            $and: [{
+                    type: booking.roomType
+                },
+                {
+                    isAvailable: true
+                },
+                {
+                    booking: {
+                        $elemMatch: {
+                            $or: [{
+                                    startDate: {
+                                        $gte: endDate
+                                    }
+                                },
+                                {
+                                    endDate: {
+                                        $lte: startDate
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }, {
+                    bookings: {
+                        $not: {
+                            $elemMatch: {
+                                $or: [{
+                                        startDate: {
+                                            $gte: startDate,
+                                            $lte: endDate
+                                        }
+                                    },
+                                    {
+                                        endDate: {
+                                            $lte: endDate,
+                                            $gte: startDate
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            ]
+        })
 
-        // console.log(data2,123)
-
-        const isBookingAvailable = true;
-
-        if (!isBookingAvailable) {
+        if (!roomAvailable) {
             return res.status(412).json({
                 message: "Room not available"
             })
         }
 
+        // console.log(roomAvailable, startDate, endDate, 123)
+        // Reserve room
+        const responseRoomBooked = await Rooms.findOneAndUpdate({
+            _id: roomAvailable._id
+        }, {
+            bookings: [...roomAvailable.bookings, booking]
+        }, {
+            new: true,
+            runValidators: true
+        });
+
+        // console.log(responseRoomBooked, 123)
+
+        // Change status of booking to "approved"
         const data = await Booking.findOneAndUpdate({
             _id: id
         }, {
