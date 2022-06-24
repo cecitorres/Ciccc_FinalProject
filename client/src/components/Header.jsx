@@ -7,7 +7,6 @@ import {UserAuth} from '../context/AuthContext';
 const Header = ({setName}) => {
   const navigate = useNavigate();
   const {logOut, isAdmin} = UserAuth();
-  console.log(isAdmin);
   
   const handleLogout = async (e) => {
     e.preventDefault();

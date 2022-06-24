@@ -26,7 +26,7 @@ const App = () => {
   // Monday, July 4, 2022
   return (
     <Router>
-      <div className="App h-100vh">
+      <div className="App">
         <Header setName={setName} />
         <Routes>
           <Route

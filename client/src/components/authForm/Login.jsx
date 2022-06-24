@@ -34,7 +34,7 @@ const Login = () => {
     e.preventDefault();
     try {
       await googleSignIn();
-      navigate("/booking");
+      navigate("/");
     } catch (e) {
       setErrMsg(e);
     }

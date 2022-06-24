@@ -32,7 +32,7 @@ const Contact = () => {
     <div className="d-flex flex-column align-items-center justify-content-center contact_container">
       {show ? <div className="success_msg"><p>{success}</p></div> : 
       <Form className="d-flex flex-column justify-content-center form_container" onSubmit={handleContactSubmit}>
-      <h2 className="text-center mb-5">Contact</h2>
+      <h2 className="text-center mb-4" style={{fontSize: "2.8rem"}}>Contact</h2>
 
       <Form.Group className="mb-3" controlId="formBasicName">
         <Form.Label style={{fontSize: "1.2rem"}}>*Name</Form.Label>
@@ -65,7 +65,7 @@ const Contact = () => {
       {showErr && !comment ? <Form.Text className="text-danger">{errMsg}</Form.Text> : ""}
       </Form.Group>
 
-      <Button variant="primary" type="submit">
+      <Button variant="primary" type="submit" className="mb-5">
         Submit
       </Button>
     </Form>}

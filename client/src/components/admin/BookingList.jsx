@@ -20,11 +20,14 @@ const BookingList = () => {
     getCustomerData();
   }, []);
 
+  const handleCancel = async () => {
+    
+  }
   console.log(customerInfo);
 
   return (
     <div className="h-100 p-3">
-      <Table striped bordered hover responsive>
+      <Table striped bordered hover responsive className="shadow-sm">
         <thead>
           <tr>
             <th>#</th>
@@ -32,8 +35,10 @@ const BookingList = () => {
             <th>Email</th>
             <th>Check-in</th>
             <th>Check-out</th>
+            <th>Room Type</th>
             <th>Status</th>
             <th>Total Price</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -44,8 +49,10 @@ const BookingList = () => {
             <td>{info.contact?.email}</td>
             <td>{info.startDate.substring(0, 10)}</td>
             <td>{info.endDate.substring(0, 10)}</td>
+            <td>{info.roomType}</td>
             <td>{info.status}</td>
             <td>{info.totalPrice} CAD</td>
+            <td onClick={handleCancel}>🗑</td>
           </tr>
           ))}
         </tbody>
