@@ -20,9 +20,16 @@ const BookingList = () => {
     getCustomerData();
   }, []);
 
-  const handleCancel = async () => {
-    
-  }
+  const handleCancel = async (id) => {
+    await axios
+      .delete(`http://localhost:2000/api/v1/bookings/${id}`)
+      .then((res) => {
+        getCustomerData();
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
   console.log(customerInfo);
 
   return (
@@ -43,17 +50,17 @@ const BookingList = () => {
         </thead>
         <tbody>
           {customerInfo.map((info, index) => (
-          <tr key={info._id}>
-            <td>{index + 1}</td>
-            <td>{info.contact?.fullName}</td>
-            <td>{info.contact?.email}</td>
-            <td>{info.startDate.substring(0, 10)}</td>
-            <td>{info.endDate.substring(0, 10)}</td>
-            <td>{info.roomType}</td>
-            <td>{info.status}</td>
-            <td>{info.totalPrice} CAD</td>
-            <td onClick={handleCancel}>🗑</td>
-          </tr>
+            <tr key={info._id}>
+              <td>{index + 1}</td>
+              <td>{info.contact?.fullName}</td>
+              <td>{info.contact?.email}</td>
+              <td>{info.startDate.substring(0, 10)}</td>
+              <td>{info.endDate.substring(0, 10)}</td>
+              <td>{info.roomType}</td>
+              <td>{info.status}</td>
+              <td>{info.totalPrice} CAD</td>
+              <td onClick={() => handleCancel(info._id)}>🗑</td>
+            </tr>
           ))}
         </tbody>
       </Table>
