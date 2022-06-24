@@ -190,9 +190,28 @@ const cancelBooking = async (req, res) => {
     }
 }
 
+
+// const deleteBooking = async (req, res) => {
+//     const id = req.params.id;
+//     Booking.findByIdAndDelete({ _id: id })
+//       .then((data) => {
+//         return res.status(200).json({
+//           message: "Succesfully deleted the student data",
+//           data
+//         });
+//       })
+//       .catch((err) => {
+//         return res.status(500).json({
+//           message: "There was an error to delete...",
+//           err: err,
+//         });
+//       });
+// }
+
 module.exports = {
     getBookings,
     createBooking,
     confirmBooking,
-    cancelBooking
+    cancelBooking,
+    // deleteBooking,
 };

@@ -30,6 +30,17 @@ const BookingList = () => {
         console.log(e);
       });
   };
+  // const handleDelete = async (id) => {
+  //   await axios
+  //     .delete(`http://localhost:2000/api/v1/bookings/${id}`)
+  //     .then((res) => {
+  //       getCustomerData();
+  //     })
+  //     .catch((e) => {
+  //       console.log(e);
+  //     });
+  // };
+
   console.log(customerInfo);
 
   return (
@@ -59,7 +70,10 @@ const BookingList = () => {
               <td>{info.roomType}</td>
               <td>{info.status}</td>
               <td>{info.totalPrice} CAD</td>
-              <td onClick={() => handleCancel(info._id)}>🗑</td>
+              {info.status !== "cancel" ?
+                <td onClick={() => handleCancel(info._id)}>❌</td> : <td></td>
+              }
+              {/* <td onClick={() => handleDelete(info._id)}>🗑</td> */}
             </tr>
           ))}
         </tbody>
