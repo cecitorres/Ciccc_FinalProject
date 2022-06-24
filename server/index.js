@@ -3,7 +3,6 @@ const app = express();
 const cors = require("cors");
 const mongoose = require("mongoose");
 
-const UserRoutes = require("./routes/user");
 const BookingRoutes = require("./routes/booking");
 const RoomRoutes = require("./routes/room");
 
@@ -28,7 +27,6 @@ app.get("/", (req, res) => {
     res.send("This is endpoint");
 });
 
-app.use("/api/v1/users", UserRoutes);
 app.use("/api/v1/bookings", BookingRoutes);
 app.use("/api/v1/rooms", RoomRoutes)
 
