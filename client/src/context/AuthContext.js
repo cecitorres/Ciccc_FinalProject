@@ -30,6 +30,9 @@ export const AuthContextProvider = ({ children }) => {
     return signInWithPopup(auth, provider);
   };
 
+  // Admin
+  const isAdmin = user && user.email === "mokochii1108@gmail.com";
+
   // Sign Out(Logout)
   const logOut = () => {
     return signOut(auth);
@@ -48,7 +51,7 @@ export const AuthContextProvider = ({ children }) => {
   }, []);
 
   return (
-    <UserContext.Provider value={{ user, signUp, logIn, logOut, googleSignIn }}>
+    <UserContext.Provider value={{ user, signUp, logIn, logOut, googleSignIn, isAdmin }}>
       {children}
     </UserContext.Provider>
   );
