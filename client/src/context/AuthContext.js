@@ -31,7 +31,7 @@ export const AuthContextProvider = ({ children }) => {
   };
 
   // Admin
-  const isAdmin = user && user.email === "mokochii1108@gmail.com";
+  const isAdmin = user && (user.email === "mokochii1108@gmail.com" || user.email === "cecitorres7@gmail.com");
 
   // Sign Out(Logout)
   const logOut = () => {

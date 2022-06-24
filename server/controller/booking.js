@@ -163,8 +163,33 @@ const confirmBooking = async (req, res) => {
     }
 }
 
+const cancelBooking = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const data = await Booking.findOneAndUpdate({
+            _id: id
+        }, {
+            status: 'cancel'
+        }, {
+            new: true,
+            runValidators: true
+        });
+
+        return res.status(200).json({
+            message: "Successfully cancel booking",
+            data
+        })
+    } catch (error) {
+        return res.status(500).json({
+            message: "There was an error!",
+            error
+        })
+    }
+}
+
 module.exports = {
     getBookings,
     createBooking,
-    confirmBooking
+    confirmBooking,
+    cancelBooking
 };
